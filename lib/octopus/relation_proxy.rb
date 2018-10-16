@@ -28,6 +28,7 @@ module Octopus
     ENUM_WITH_BLOCK_METHODS = [:find, :select, :none?, :any?, :one?, :many?]
 
     def method_missing(method, *args, &block)
+      Octopus.logger.info("RelationProxy#method_missing method: #{method}, #{args.inspect}")
       if ENUM_METHODS.include?(method) || block && ENUM_WITH_BLOCK_METHODS.include?(method)
         run_on_shard { @ar_relation.to_a }.public_send(method, *args, &block)
       elsif block
