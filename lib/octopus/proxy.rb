@@ -334,6 +334,7 @@ module Octopus
 
     # Temporarily switch `current_shard` and run the block
     def using_shard(shard, &_block)
+      ::Octopus.logger.info("Proxy#using_shard shard: #{using_shard}")
       older_shard = current_shard
       older_slave_group = current_slave_group
       older_load_balance_options = current_load_balance_options

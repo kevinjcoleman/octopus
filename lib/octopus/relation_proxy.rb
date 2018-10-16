@@ -38,6 +38,7 @@ module Octopus
           if method == :load_records
             @ar_relation.send(method, *args)
           else
+            ::Octopus.logger.info("RelationProxy#method_missing public send of method: #{method}, #{args} to #{@ar_relation.inspect}")
             @ar_relation.public_send(method, *args)
           end
         end
